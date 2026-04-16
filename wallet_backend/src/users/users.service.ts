@@ -19,6 +19,12 @@ export class UsersService {
         return this.userRepository.findOne({
             where: { email },
         })
+
+    }
+    async findByreferralCode(referralCode: string){
+        return this.userRepository.findOne({
+            where: {referralCode},
+        })
     }
 
 }
