@@ -17,7 +17,7 @@ export class User {
     @Column({ default: true })
     isActive: boolean;
 
-    @Column({ unique: true, nullable: true})
+    @Column({ unique: true, nullable: true })
     referralCode: string;
 
     @Column({ nullable: true })
@@ -28,5 +28,8 @@ export class User {
 
     @UpdateDateColumn()
     updatedDataAt: Date;
+
+    @Column({ nullable: true })
+    refreshToken: string;
 }
 

@@ -18,12 +18,27 @@ export class UsersService {
     async findByEmail(email: string) {
         return this.userRepository.findOne({
             where: { email },
-        })
+        });
 
     }
-    async findByreferralCode(referralCode: string){
+    async findByreferralCode(referralCode: string) {
         return this.userRepository.findOne({
-            where: {referralCode},
+            where: { referralCode },
+        });
+    }
+
+    async updateRefreshToken(
+        userId: string,
+        refreshToken: string,
+    ) {
+        await this.userRepository.update(userId, {
+            refreshToken,
+        });
+    }
+
+    async findById(id: string){
+        return this.userRepository.findOne({
+            where:{id},
         })
     }
 

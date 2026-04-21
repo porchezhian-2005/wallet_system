@@ -5,11 +5,12 @@ import { UsersModule } from 'src/users/users.module';
 
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { jwtStrategy } from './strategy/jwt.strategy';
 
 @Module({
   imports: [
     UsersModule,
-
+    
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -18,13 +19,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         secret: configService.get<string>('JWT_ACCESS_SECRET')!,
         signOptions: {
           expiresIn:
-            configService.get<string>('JWT_ACCESS_EXPIRY') as any,
+            configService.get<string>('JWT_ACCESS_EXPIRATION') as any,
         },
       }),
     }),
   ],
 
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, jwtStrategy],
 })
 export class AuthModule {}
